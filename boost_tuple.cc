@@ -2,6 +2,7 @@
 #include <map>
 #include <boost/tuple/tuple.hpp>
 #include <boost/tuple/tuple_io.hpp>
+#include <boost/tuple/tuple_comparison.hpp>
 
 class mystring {
 public:
