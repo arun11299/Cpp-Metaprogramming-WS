@@ -4,28 +4,24 @@
 #include <boost/tuple/tuple_io.hpp>
 #include <boost/tuple/tuple_comparison.hpp>
 
-class mystring {
-public:
-  bool operator<(const mystring& b) const {
-    std::cout << "operator<" << std::endl;
-    return true;
-  }
-};
+typedef boost::tuple<int,int> Key;
 
-typedef boost::tuple<mystring, mystring> Key;
-int data = 100;
+using namespace boost::tuples;
 
-bool operator < (const Key& a, const Key& b)
-{
-  return a.get<0>() < b.get<0>() ||
-	 a.get<1>() < b.get<1>();
+template<class T1, class T2>
+inline bool lt(const T1& lhs, const T2& rhs) {
+  std::cout << lhs.get_head() << " : " << rhs.get_head() << std::endl;
+return lhs.get_head() < rhs.get_head()  ||
+( !(rhs.get_head() < lhs.get_head()) &&
+lt(lhs.get_tail(), rhs.get_tail()));
 }
+template<>
+bool lt<null_type,null_type>(const null_type&, const null_type&) { return false; }
 
 int main() {
-  mystring str1, str2;
-  Key fk = boost::make_tuple(str1, str2);
-  std::map<Key, int, std::less<Key> > m;
-  m.insert(std::make_pair(fk, 1));
 
+  Key fk = boost::make_tuple(1, 2);
+  Key fy = boost::make_tuple(2, 1);
+  std::cout << lt(fy , fk) << std::endl;
   return 0;
 }
