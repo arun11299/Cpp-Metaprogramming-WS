@@ -69,6 +69,11 @@ public:
   //Default constructor
   Function() = default;
 
+  template <typename Callable>
+  Function(Callable f): // Requires callable be copyable
+    impl_base_(std::make_unique<detail::func_impl<Callable>>(std::move(f), detail::constructor_tag()))
+  {}
+
   // Copy constructor
   Function(const Function& other)
   {
@@ -88,11 +93,6 @@ public:
     this->impl_base_ = 
       std::make_unique<detail::func_impl<Callable>>(std::move(cb), detail::constructor_tag());
     return *this;
-  }
-
-  template <typename Callable>
-  Function(Callable f): // Requires callable be copyable
-    impl_base_(std::make_unique<detail::func_impl<Callable>>(std::move(f), detail::constructor_tag())) {
   }
 
   Ret operator()(Args&&... args)
