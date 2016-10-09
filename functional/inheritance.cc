@@ -33,6 +33,7 @@ public:
 };
 
 int main() {
+  /*
   std::unique_ptr<Finarfin> finrod = std::make_unique<Finrod>();
   std::function<void()> folk_1 = std::bind(&Finarfin::stay, finrod.get());
   folk_1();
@@ -40,6 +41,7 @@ int main() {
   std::unique_ptr<Finarfin> gala = std::make_unique<Galadriel>();
   std::function<void()> folk_2 = std::bind(&Finarfin::stay, gala.get());
   folk_2();
+  */
 
   std::function<A*()> f(func1);
   f = func2;
