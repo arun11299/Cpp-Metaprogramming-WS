@@ -97,8 +97,8 @@ public:
     typedef typename Merge<sorted_first, sorted_second>::type type;
 };
 
-template<int... Vals> struct Sort :
-public SortHelper<Ints<Vals...>> {};
+template<int... Vals> 
+struct Sort : public SortHelper<Ints<Vals...>> {};
 
 int main(int argc, char **argv)
 {
